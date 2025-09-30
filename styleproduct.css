@@ -1,0 +1,42 @@
+.product-container {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
+.product-container img {
+  width: 350px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.product-container .info {
+  max-width: 500px;
+}
+
+.product-container h2 {
+  margin: 0 0 10px;
+}
+
+.product-container .price {
+  font-size: 22px;
+  font-weight: bold;
+  color: red;
+}
+
+.product-container .old-price {
+  text-decoration: line-through;
+  color: gray;
+  margin-left: 10px;
+}
+
+.product-container button {
+  padding: 10px 20px;
+  margin-top: 15px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+

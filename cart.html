@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="stylecart.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <style>
+      .order-box {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 20px auto;
+        width: 350px;
+        text-align: left;
+        border-radius: 8px;
+        background: #f9f9f9;
+      }
+      .order-box h3 {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      .order-box label {
+        display: block;
+        margin-top: 8px;
+        font-weight: bold;
+      }
+      .order-box input,
+      .order-box textarea,
+      .order-box select {
+        width: 100%;
+        padding: 6px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .qr-box {
+        display: none;
+        margin-top: 20px;
+        text-align: center;
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .qr-box img {
+        width: 220px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+      .qr-box p {
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+      }
+      .home-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: #fff;
+        color: #4e54c8;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+        z-index: 1000;
+      }
+      .home-btn:hover {
+        background: #4e54c8;
+        color: #fff;
+      }
+      .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      .cart-details {
+        flex: 1;
+      }
+      .cart-actions {
+        text-align: right;
+      }
+      .cart-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Giỏ hàng của bạn</h2>
+
+    <!-- Chọn tất cả -->
+    <!DOCTYPE html>
+
+    <html lang="vi">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Giỏ hàng</title>
+        <link rel="stylesheet" href="stylecart.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        />
+        <style>
+          .order-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 20px auto;
+            width: 350px;
+            text-align: left;
+            border-radius: 8px;
+            background: #f9f9f9;
+          }
+          .order-box h3 {
+            text-align: center;
+            margin-bottom: 15px;
+          }
+          .order-box label {
+            display: block;
+            margin-top: 8px;
+            font-weight: bold;
+          }
+          .order-box input,
+          .order-box textarea,
+          .order-box select {
+            width: 100%;
+            padding: 6px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+          }
+          .qr-box {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+          .qr-box img {
+            width: 220px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+          }
+          .qr-box p {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+          }
+          .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #fff;
+            color: #4e54c8;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+          }
+          .home-btn:hover {
+            background: #4e54c8;
+            color: #fff;
+          }
+          .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+          }
+          .cart-details {
+            flex: 1;
+          }
+          .cart-actions {
+            text-align: right;
+          }
+          .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+          }
+        </style>
+      </head>
+
+      <body>
+        <!-- Chọn tất cả -->
+        <div class="cart-header">
+          <input type="checkbox" id="selectAll" />
+          <label for="selectAll">Chọn tất cả</label>
+        </div>
+
+        <div id="cart-container"></div>
+        <h3 id="total"></h3>
+        <a href="index.php" class="home-btn">🏠 Trang chủ</a>
+
+        <!-- Thông tin khách hàng -->
+        <div class="order-box">
+          <h3>Thông tin khách hàng</h3>
+          <label for="fullname">Họ và Tên:</label>
+          <input type="text" id="fullname" placeholder="Nhập họ tên..." />
+
+          <label for="phone">Số điện thoại:</label>
+          <input type="text" id="phone" placeholder="Nhập số điện thoại..." />
+
+          <label for="address">Địa chỉ:</label>
+          <textarea
+            id="address"
+            placeholder="Nhập địa chỉ..."
+            rows="3"
+          ></textarea>
+
+          <label for="payment">Phương thức thanh toán:</label>
+          <select id="payment">
+            <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+            <option value="bank">Chuyển khoản ngân hàng</option>
+          </select>
+          <!-- QR bank -->
+          <div class="qr-box" id="qrBox">
+            <img src="image/qr-bank.jpg" alt="QR Bank" />
+            <p>
+              Nội dung: Thanh toán đơn hàng<br />
+              Số tiền: <span id="qrAmount">0</span>₫
+            </p>
+          </div>
+        </div>
+
+        <button id="checkout">Thanh toán</button>
+
+        <!-- Thông báo -->
+        <div id="toast"></div>
+
+        <!-- KHUYẾN MÃI -->
+        <div class="coupon-section">
+          <h3>🎟 Mã giảm giá</h3>
+          <div class="coupon-box">
+            <select id="coupon">
+              <option value="0">-- Không áp dụng --</option>
+            </select>
+            <button id="applyCoupon">Áp dụng</button>
+          </div>
+          <p id="coupon-message"></p>
+        </div>
+
+        <script>
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          let container = document.getElementById("cart-container");
+          let totalEl = document.getElementById("total");
+          let paymentSelect = document.getElementById("payment");
+          let qrBox = document.getElementById("qrBox");
+          let qrAmount = document.getElementById("qrAmount");
+          let orderTotal = 0;
+
+          function showToast(message, type = "info") {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            if (type === "success") toast.style.background = "#4caf50";
+            if (type === "error") toast.style.background = "#f44336";
+            if (type === "info") toast.style.background = "#2196f3";
+            setTimeout(() => {
+              toast.className = toast.className.replace("show", "");
+            }, 2500);
+          }
+
+          function renderCart() {
+            container.innerHTML = "";
+            let total = 0;
+            if (cart.length === 0) {
+              container.innerHTML = "<p>Giỏ hàng trống.</p>";
+              totalEl.innerText = "";
+              return;
+            }
+            cart.forEach((item, index) => {
+              if (item.selected === undefined) item.selected = true; // mặc định chọn
+              let priceNum = parseInt(item.price.replace(/[^\d]/g, ""));
+              if (item.selected) total += priceNum * item.quantity;
+
+              let div = document.createElement("div");
+              div.classList.add("cart-item");
+              div.innerHTML = `
+            <input type="checkbox" ${
+              item.selected ? "checked" : ""
+            } onchange="toggleSelect(${index}, this.checked)" />
+            <img src="${item.image}" alt="${item.name}" width="60">
+            <div class="cart-details">
+              <b>${item.name}</b><br>
+              ${item.price}
+            </div>
+            <div class="cart-actions">
+              <button class="btn-dec" onclick="changeQuantity(${index}, -1)">-</button>
+              <span>${item.quantity}</span>
+              <button class="btn-inc" onclick="changeQuantity(${index}, 1)">+</button>
+              <button class="btn-del" onclick="removeItem(${index})">Xóa</button>
+            </div>
+          `;
+              container.appendChild(div);
+            });
+            orderTotal = total;
+            totalEl.innerText = "Tổng: " + total.toLocaleString("vi-VN") + "₫";
+            qrAmount.innerText = total.toLocaleString("vi-VN");
+
+            // cập nhật trạng thái "chọn tất cả"
+            document.getElementById("selectAll").checked = cart.every(
+              (i) => i.selected
+            );
+          }
+
+          function toggleSelect(i, checked) {
+            cart[i].selected = checked;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          }
+
+          function changeQuantity(i, delta) {
+            if (!cart[i]) return;
+            cart[i].quantity += delta;
+            if (cart[i].quantity <= 0) {
+              cart.splice(i, 1);
+              showToast("Đã xóa sản phẩm khỏi giỏ hàng", "error");
+            } else {
+              showToast("Cập nhật số lượng: " + cart[i].quantity, "info");
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          }
+
+          function removeItem(i) {
+            cart.splice(i, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+            showToast("Sản phẩm đã bị xóa!", "error");
+          }
+
+          // Chọn tất cả
+          document
+            .getElementById("selectAll")
+            .addEventListener("change", function () {
+              cart.forEach((item) => (item.selected = this.checked));
+              localStorage.setItem("cart", JSON.stringify(cart));
+              renderCart();
+            });
+
+          // Hiển thị QR khi chọn bank
+          paymentSelect.addEventListener("change", () => {
+            qrBox.style.display =
+              paymentSelect.value === "bank" ? "block" : "none";
+          });
+
+          document.getElementById("checkout").addEventListener("click", () => {
+            const selectedItems = cart.filter((i) => i.selected);
+            if (selectedItems.length === 0) {
+              showToast("Chưa chọn sản phẩm nào để thanh toán!", "error");
+              return;
+            }
+            const name = document.getElementById("fullname").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const payment = paymentSelect.value;
+            if (!name || !phone || !address) {
+              showToast("Vui lòng điền đầy đủ thông tin!", "error");
+              return;
+            }
+            let total = 0;
+            selectedItems.forEach((item) => {
+              let priceNum = parseInt(item.price.replace(/[^\d]/g, ""));
+              total += priceNum * item.quantity;
+            });
+            fetch("save_order.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                phone,
+                address,
+                cart: selectedItems,
+                total,
+                payment,
+              }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  showToast("Thanh toán thành công!", "success");
+                  localStorage.removeItem("cart");
+                  cart = [];
+                  renderCart();
+                } else {
+                  showToast("Có lỗi khi lưu đơn hàng!", "error");
+                }
+              })
+              .catch((err) => {
+                console.error(err);
+                showToast("Lỗi kết nối server!", "error");
+              });
+          });
+
+          renderCart();
+        </script>
+        <script src="coupon.js"></script>
+      </body>
+    </html>
+  </body>
+</html>

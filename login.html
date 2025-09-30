@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Đăng nhập</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background: #4e54c8;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #3b40a4;
+      }
+
+      .register-link {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .register-link a {
+        color: #4e54c8;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .register-link a:hover {
+        text-decoration: underline;
+      }
+      .home-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: #fff;
+        color: #4e54c8;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+        z-index: 1000;
+      }
+      .home-btn:hover {
+        background: #4e54c8;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h1>Đăng nhập</h1>
+      <a href="index.php" class="home-btn">🏠 Trang chủ</a>
+      <form action="login.php" method="POST">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Đăng nhập</button>
+      </form>
+      <div class="register-link">
+        Chưa có tài khoản? <a href="register.html">Đăng ký</a><br />
+        <br />
+        <a href="forgot_password.html">Quên mật khẩu?</a>
+      </div>
+    </div>
+  </body>
+</html>

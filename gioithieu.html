@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <title>Tiki Store</title>
+    <link rel="icon" type="image/jpg" href="image/logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styleError.css" />
+    <link rel="stylesheet" href="stylebanner.css" />
+    <link rel="stylesheet" href="style_feature.css" />
+    <link rel="stylesheet" href="StyleSP.css" />
+    <link rel="stylesheet" href="stylecheckout.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/665f470f28.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <img src="image/logo.png" alt="Tibiki" height="65" width="150" />
+      <div class="search-box">
+        <a href="">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
+        <button onclick="search()">Tìm kiếm</button>
+      </div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.php">Trang chủ</a></li>
+          <li><a href="gioithieu.html">Giới thiệu</a></li>
+          <li><a href="shop.html">Cửa hàng</a></li>
+          <li><a href="contact.html">Liên hệ</a></li>
+          <li>
+            <a href="cart.html" class="cart-link">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Modal Đăng nhập / Đăng ký -->
+    <div id="auth-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn" id="close-auth">&times;</span>
+
+        <!-- Form Đăng nhập -->
+        <div id="login-form">
+          <h2>Đăng nhập</h2>
+          <div id="login-message" class="message"></div>
+          <input
+            type="text"
+            id="login-username"
+            placeholder="Tên đăng nhập"
+            required
+          />
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Mật khẩu"
+            required
+          />
+          <button onclick="handleLogin()">Đăng nhập</button>
+          <p>Chưa có tài khoản? <a href="#" id="show-register">Đăng ký</a></p>
+        </div>
+
+        <!-- Form Đăng ký -->
+        <div id="register-form" class="hidden">
+          <h2>Đăng ký</h2>
+          <div id="register-message" class="message"></div>
+          <input
+            type="text"
+            id="register-username"
+            placeholder="Tên đăng nhập"
+            required
+          />
+          <input
+            type="email"
+            id="register-email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            id="register-password"
+            placeholder="Mật khẩu"
+            required
+          />
+          <button onclick="handleRegister()">Đăng ký</button>
+          <p>Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <section class="video">
+      <h2>Giới thiệu Tiki</h2>
+      <a
+        target="_blank"
+        href="https://youtu.be/-OPMZhUMUlI?si=watHDFeSqBXuJ8bJ"
+      >
+        <video controls autoplay muted loop width="60%">
+          <source src="video/giới thiệu.mp4" type="video/mp4" />
+        </video>
+      </a>
+    </section>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+      <div id="chat-header">Chat với Tibiki <span id="chat-close">✕</span></div>
+      <div id="chat-body"></div>
+      <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." />
+        <button id="chat-send">Gửi</button>
+      </div>
+    </div>
+    <button id="chat-toggle">💬</button>
+
+    <script src="script.js"></script>
+    <script src="script_LogIn_Out.js"></script>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Cột 1: Logo + mô tả -->
+        <div class="footer-column">
+          <h2 class="logo">Tibiki Store</h2>
+          <p>Giúp bạn mua sắm dễ dàng, nhanh chóng và tiết kiệm mỗi ngày.</p>
+        </div>
+
+        <!-- Cột 2: Liên kết nhanh -->
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Sản phẩm</a></li>
+            <li><a href="#">Khuyến mãi</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </div>
+
+        <!-- Cột 3: Hỗ trợ -->
+        <div class="footer-column">
+          <h3>Hỗ trợ</h3>
+          <ul>
+            <li><a href="#">Hướng dẫn mua hàng</a></li>
+            <li><a href="#">Câu hỏi thường gặp</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Chăm sóc khách hàng</a></li>
+          </ul>
+        </div>
+
+        <!-- Cột 4: Mạng xã hội -->
+        <div class="footer-column">
+          <h3>Kết nối</h3>
+          <div class="social-icons">
+            <a href="#"
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+                alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/733/733558.png"
+                alt="Instagram"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
+                alt="Twitter"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                alt="YouTube"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dòng bản quyền -->
+      <div class="footer-bottom">
+        <p>© 2025 Tibiki Store</p>
+      </div>
+    </footer>
+  </body>
+</html>

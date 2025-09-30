@@ -1,0 +1,144 @@
+body {
+    background-image: url('image/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* ===== Nền trang nhẹ nhàng ===== */
+/*.soft-bg {
+    background: #f5f7f9;
+    xám nhạt dịu mắt 
+    padding: 60px 20px;
+    color: #333;
+}*/
+
+.contact-wrapper h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.contact-wrapper .subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+    color: #666;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ===== Card ===== */
+.contact-card,
+.contact-form {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.info-card h2,
+.contact-form h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.contact-grid {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+.info-card a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Form ===== */
+.contact-form label {
+    font-weight: 600;
+    margin: 12px 0 6px;
+    display: block;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    border: 1.5px solid #d0d5d8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    background: #fdfdfd;
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #27ae60;
+    outline: none;
+}
+
+/* ===== Nút cơ bản xanh lá ===== */
+.btn-basic {
+    margin-top: 18px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.btn-basic:hover {
+    background: #219150;
+}
+
+/* Footer */
+.basic-footer {
+    background: #eceff1;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.info-card {
+    background-image: url("image/khungcontact1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-card p {
+    line-height: 2;
+}
+
+.info-card h2 {
+    margin-top: 10px;
+}

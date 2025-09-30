@@ -1,0 +1,45 @@
+.features {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 box trên 1 hàng */
+    gap: 25px;
+    padding: 60px 5%;
+    background: #fff;
+    text-align: center;
+}
+
+.feature {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.feature img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+
+    /* Không cho xuống dòng */
+    white-space: nowrap;
+}
+
+.feature p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Hover effect */
+.feature:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}

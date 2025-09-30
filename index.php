@@ -1,0 +1,303 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['username']);
+$username = $isLoggedIn ? $_SESSION['username'] : '';
+?>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>Tiki Store</title>
+    <link rel="icon" type="image/jpg" href="image/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleNotification.css">
+    <link rel="stylesheet" href="styleError.css">
+    <link rel="stylesheet" href="stylebanner.css">
+    <link rel="stylesheet" href="style_feature.css">
+    <link rel="stylesheet" href="StyleSP.css">
+    <link rel="stylesheet" href="stylecheckout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/665f470f28.js" crossorigin="anonymous"></script>
+    <style>
+        .btn-auth {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            margin-left: 10px;
+        }
+        .welcome {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <img src="image/logo.png" alt="Tibiki" height="65" width="150">
+        <div class="search-box">
+            <a href="">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
+            <button onclick="search()">Tìm kiếm</button>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.php">Trang chủ</a></li>
+                <li><a href="gioithieu.html">Giới thiệu</a></li>
+                <li><a href="shop.html">Cửa hàng</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+                <li>
+                    <a href="cart.html" class="cart-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count" class="cart-count hidden">0</span>
+                    </a>
+                </li>
+                <li class="login-logout">
+                    <?php if ($isLoggedIn): ?>
+                        <span class="welcome">Xin chào, <?php echo htmlspecialchars($username); ?></span>
+                        <a href="logout.php"><button class="btn-auth">Đăng xuất</button></a>
+                    <?php else: ?>
+                        <a href="login.html"><button class="btn-auth">Đăng nhập</button></a>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- BANNER -->
+    <section class="banner-row">
+        <!-- Cột trái: Slideshow -->
+        <div class="slideshow-container">
+            <div class="mySlides fade"><img src="image/b1.png" alt="Banner 1"></div>
+            <div class="mySlides fade"><img src="image/b2.png" alt="Banner 2"></div>
+            <div class="mySlides fade"><img src="image/b3.png" alt="Banner 3"></div>
+            <div class="mySlides fade"><img src="image/b4.png" alt="Banner 4"></div>
+            <div class="mySlides fade"><img src="image/b5.png" alt="Banner 5"></div>
+            <div class="mySlides fade"><img src="image/b6.png" alt="Banner 6"></div>
+            <div class="mySlides fade"><img src="image/b7.png" alt="Banner 7"></div>
+
+            <!-- Nút điều hướng -->
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
+            <!-- Dot -->
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
+        </div>
+
+        <!-- Cột phải: Sách bán chạy -->
+        <aside class="book-column">
+            <h3>Sách bán chạy</h3>
+            <ul>
+                <a href="product.html?id=5"><li><img src="image/sach1.png" alt=""> Nghệ Thuật Tư Duy Phản Biện </li></a>
+                <a href="product.html?id=6"><li><img src="image/sach2.png" alt=""> Rèn Luyện Tư Duy Hệ Thống Trong Công Việc</li></a>
+                <a href="product.html?id=7"><li><img src="image/sach3.png" alt=""> Vận Mệnh Tiền Kiếp </li></a>
+                <a href="product.html?id=8"><li><img src="image/sach4.png" alt=""> Phương Pháp Làm Việc Siêu Hiệu Quả Của Toyota</li></a>
+            </ul>
+        </aside>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <img src="image/shipping.png" alt="Miễn phí vận chuyển">
+            <h3>Miễn phí vận chuyển</h3>
+            <p>Giao hàng tận nơi nhanh chóng, không mất phí ship.</p>
+        </div>
+        <div class="feature">
+            <img src="image/online.png" alt="Đặt hàng trực tuyến">
+            <h3>Đặt hàng trực tuyến</h3>
+            <p>Chỉ vài cú click, mua sắm dễ dàng mọi lúc mọi nơi.</p>
+        </div>
+        <div class="feature">
+            <img src="image/saving.png" alt="Tiết kiệm tiền">
+            <h3>Tiết kiệm tiền</h3>
+            <p>Nhiều ưu đãi và khuyến mãi hấp dẫn hằng ngày.</p>
+        </div>
+        <div class="feature">
+            <img src="image/gift.png" alt="Khuyến mãi">
+            <h3>Khuyến mãi</h3>
+            <p>Giảm giá sốc, coupon hấp dẫn cho mọi khách hàng.</p>
+        </div>
+        <div class="feature">
+            <img src="image/happy.png" alt="Bán vui vẻ">
+            <h3>Thân thiện</h3>
+            <p>Mua bán thoải mái, vui vẻ như đang trò chuyện.</p>
+        </div>
+        <div class="feature">
+            <img src="image/support.png" alt="Hỗ trợ 24/7">
+            <h3>Hỗ trợ 24/7</h3>
+            <p>Đội ngũ tư vấn luôn sẵn sàng hỗ trợ bạn bất kỳ lúc nào.</p>
+        </div>
+    </section>
+
+    <!-- SẢN PHẨM NỔI BẬT -->
+    <section class="featured-products">
+        <h2>Sản phẩm nổi bật</h2>
+        <p class="subtitle">Chất lượng - Uy tín - Tin dùng</p>
+        <div class="product-grid">
+            <!-- SP 1 -->
+            <div class="product-card">
+                <div class="sale-badge">-14%</div>
+                <a href="product.html?id=1"><img src="image/sp1.png" alt="Sữa"></a>
+                <div class="info">
+                    <a href="product.html?id=1"><h3>Sữa Lúa Mạch Nestlé MILO Teen Protein Canxi (24 x 210ml)</h3></a>
+                    <br>
+                    <span class="official">Chính hãng</span>
+                    <div class="rating-sold">
+                        <div class="stars">★★★★★</div>
+                        <span class="sold">Đã bán 2k</span>
+                    </div>
+                    <p class="price">264.629₫ <span class="old-price">310.000₫</span></p>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i> Thêm</button>
+                </div>
+            </div>
+            <!-- SP 2 -->
+            <div class="product-card">
+                <div class="sale-badge">-2%</div>
+                <a href="product.html?id=2"><img src="image/sp2.png" alt="Harry Potter"></a>
+                <div class="info">
+                    <a href="product.html?id=2"><h3>Combo Harry Potter (Trọn Bộ 7 Cuốn) + Tặng Bản Đồ Phép Thuật</h3></a>
+                    <span class="official">Chính hãng</span>
+                    <div class="rating-sold">
+                        <div class="stars">★★★★★</div>
+                        <span class="sold">Đã bán 350</span>
+                    </div>
+                    <p class="price">1.720.000₫ <span class="old-price">1.750.000₫</span></p>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i> Thêm</button>
+                </div>
+            </div>
+            <!-- SP 3 -->
+            <div class="product-card">
+                <div class="sale-badge">-45%</div>
+                <a href="product.html?id=3"><img src="image/sp3.png" alt="Bút bi"></a>
+                <div class="info">
+                    <a href="product.html?id=3"><h3>Combo Bút Bi Thiên Long PRO 027 (0.5mm) – TL-105</h3></a>
+                    <br>
+                    <span class="official">Chính hãng</span>
+                    <div class="rating-sold">
+                        <div class="stars">★★★★★</div>
+                        <span class="sold">Đã bán 800</span>
+                    </div>
+                    <p class="price">22.000₫ <span class="old-price">40.000₫</span></p>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i> Thêm</button>
+                </div>
+            </div>
+            <!-- SP 4 -->
+            <div class="product-card">
+                <div class="sale-badge">-39%</div>
+                <a href="product.html?id=4"><img src="image/sp4.png" alt="Samsung Galaxy S24 FE"></a>
+                <div class="info">
+                    <a href="product.html?id=4"><h3>Điện Thoại Samsung Galaxy S24 FE (8GB/128GB) - Hàng Chính Hãng</h3></a>
+                    <span class="official">Chính hãng</span>
+                    <div class="rating-sold">
+                        <div class="stars">★★★★★</div>
+                        <span class="sold">Đã bán 20</span>
+                    </div>
+                    <p class="price">10.190.000₫ <span class="old-price">16.690.000₫</span></p>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i> Thêm</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video -->
+    <section class="video">
+        <h2>Giới thiệu</h2>
+        <a target="_blank" href="https://youtu.be/-OPMZhUMUlI?si=watHDFeSqBXuJ8bJ">
+            <video controls autoplay muted loop width="60%">
+                <source src="video/giới thiệu.mp4" type="video/mp4">
+            </video>
+        </a>
+    </section>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <div id="chat-header">Chat với Tibiki <span id="chat-close">✕</span></div>
+        <div id="chat-body"></div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+            <button id="chat-send">Gửi</button>
+        </div>
+    </div>
+    <button id="chat-toggle">💬</button>
+
+    <!-- Thông báo THÊM SP VÀO GIỎ HÀNG -->
+    <div id="toast"></div>
+
+    <script src="script.js"></script>
+    <script src="script_LogIn_Out.js"></script>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h2 class="logo">Tibiki Store</h2>
+                <p>Giúp bạn mua sắm dễ dàng, nhanh chóng và tiết kiệm mỗi ngày.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Khuyến mãi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chăm sóc khách hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Kết nối</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <script>
+            function search() {
+                let keyword = document.getElementById("searchInput").value.trim();
+                if (keyword) {
+                    window.location.href = "shop.html?search=" + encodeURIComponent(keyword);
+                }
+            }
+        </script>
+        <div class="footer-bottom">
+            <p>© 2025 Tibiki Store</p>
+        </div>
+    </footer>
+
+</body>
+</html>

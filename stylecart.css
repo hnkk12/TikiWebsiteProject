@@ -1,0 +1,260 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f9ff, #cbebff);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== TIÊU ĐỀ ===== */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #27ae60;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* ===== CONTAINER ===== */
+#cart-container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+#cart-container p {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}
+
+/* ===== SẢN PHẨM ===== */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    transition: 0.3s;
+}
+
+.cart-item:hover {
+    background: #f9f9f9;
+    transform: scale(1.01);
+    border-radius: 10px;
+}
+
+/* Ảnh sản phẩm */
+.cart-item img {
+    width: 80px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cart-item img:hover {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+/* Thông tin sản phẩm */
+.cart-details {
+    flex: 1;
+    margin-left: 15px;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+/* Khu vực nút hành động */
+.cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ===== NÚT ===== */
+.cart-actions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.btn-inc,
+.btn-dec {
+    background: #3498db;
+    color: white;
+}
+
+.btn-inc:hover,
+.btn-dec:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+.btn-del {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-del:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Số lượng */
+.cart-actions span {
+    min-width: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* ===== TỔNG TIỀN ===== */
+#total {
+    text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #27ae34;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 10px;
+}
+
+/* ===== NÚT THANH TOÁN ===== */
+#checkout {
+    display: block;
+    margin: 25px auto;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #f74d2f, #f43939);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+    transition: 0.3s;
+}
+
+#checkout:hover {
+    background: linear-gradient(45deg, #f39c1a, #faa718);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(39, 174, 96, 0.5);
+}
+
+/* ====== THÔNG BÁO TRẠNG THÁI THANH TOÁN ======== */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    min-width: 250px;
+    max-width: 350px;
+    background: #333;
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* KHUYẾN MÃI */
+.coupon-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px dashed #ff9800;
+    border-radius: 12px;
+    background: #fff8e1;
+    max-width: 400px;
+}
+
+.coupon-section h3 {
+    margin: 0 0 10px;
+    color: #e65100;
+    font-size: 18px;
+}
+
+.coupon-box {
+    display: flex;
+    gap: 10px;
+}
+
+.coupon-box select {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.coupon-box button {
+    padding: 8px 16px;
+    border: none;
+    background: #ff9800;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.coupon-box button:hover {
+    background: #e65100;
+}
+
+#coupon-message {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #4caf50;
+}

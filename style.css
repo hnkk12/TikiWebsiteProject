@@ -1,0 +1,492 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #d4e0e3;
+  color: rgb(7, 112, 250);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 36px 10px 35px;
+}
+
+.logo {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 310px;
+}
+.btn-login {
+  background: linear-gradient(135deg, #4facfe, #00f2fe); /* màu nền đẹp */
+  color: white; /* chữ trắng */
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 25px; /* bo tròn */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+}
+.btn-logout {
+  background: linear-gradient(135deg, #4facfe, #00f2fe); /* màu nền đẹp */
+  color: white; /* chữ trắng */
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 25px; /* bo tròn */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+}
+.btn-login:hover {
+  background: linear-gradient(135deg, #43e97b, #38f9d7); /* đổi màu khi hover */
+  transform: scale(1.05); /* phóng to nhẹ */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+.search-box button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.search-box button:hover {
+  background: #2968f0;
+}
+
+.navbar ul {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.navbar a {
+  color: rgb(52, 52, 52);
+  text-decoration: none;
+  padding: 15px 20px;
+  display: block;
+  text-align: center;
+}
+
+.navbar a:hover {
+  color: rgb(53, 191, 215);
+}
+
+.navbar li {
+  float: left;
+}
+
+/* Icon giỏ hàng */
+.cart-link {
+  position: relative;
+  display: inline-block;
+  font-size: 26px;
+  /* to hơn một chút cho cân đối */
+  color: #333;
+  text-decoration: none;
+  margin-right: 15px;
+  /* cách nút đăng nhập */
+}
+
+/* Badge số lượng */
+.cart-count {
+  position: absolute;
+  top: 10px;
+  /* dịch xuống gần icon */
+  right: 15px;
+  /* dịch sát vào giỏ hàng */
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 50%;
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Ẩn khi chưa có sản phẩm */
+.cart-count.hidden {
+  display: none;
+}
+
+#login-btn,
+#logout-btn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#login-btn:hover,
+#logout-btn:hover {
+  background: #2968f0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #2968f0;
+}
+
+.modal-content a {
+  color: #3b82f6;
+  cursor: pointer;
+}
+
+.close-btn {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.products {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.product img {
+  max-width: 100%;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.book-column ul a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.book-column ul a:hover {
+  color: #eb9925;
+}
+
+.video {
+  text-align: center;
+  padding: 10px;
+  font-size: 2em;
+}
+
+.video h2 {
+  padding: 10px;
+}
+
+/* CHATBOT */
+#chatbot {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Nunito", sans-serif;
+  z-index: 9999;
+}
+
+#chat-header {
+  background: #2563eb;
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+#chat-send {
+  margin-left: 6px;
+  padding: 6px 12px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+}
+
+.message {
+  max-width: 75%;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 16px;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+/* Tin nhắn người dùng */
+.user-msg {
+  background: #2196f3;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 15px;
+  margin: 6px 0;
+  text-align: right;
+  align-self: flex-end;
+  max-width: 75%;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Tin nhắn bot */
+.bot-msg {
+  background: #f1f1f1;
+  color: #333;
+  padding: 8px 10px;
+  border-radius: 15px;
+  margin: 6px 0;
+  text-align: left;
+  align-self: flex-start;
+  max-width: 75%;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.footer {
+  background: #222;
+  color: #ddd;
+  padding: 50px 10%;
+  font-family: "Arial", sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.footer-column h2.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #bbb;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ff6b6b;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+  filter: brightness(1) invert(0);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0 0;
+  border-top: 1px solid #444;
+  margin-top: 30px;
+}
+
+.footer-bottom p {
+  font-size: 13px;
+  color: #888;
+}

@@ -1,0 +1,36 @@
+/* ========== THÔNG BÁO ========== */
+#toast {
+    visibility: hidden;
+    min-width: 300px;
+    max-width: 350px;
+    margin-left: -175px;
+    background: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 10px;
+    padding: 15px 20px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 40px;
+    font-size: 15px;
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    opacity: 0;
+}
+
+/* Khi hiển thị */
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 60px;
+}
+
+/* Icon trong toast */
+#toast i {
+    font-size: 20px;
+}

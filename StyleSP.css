@@ -1,0 +1,136 @@
+.featured-products {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.featured-products h2 {
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.featured-products .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Grid layout */
+.featured-products .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+/* Card */
+.featured-products .product-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.featured-products .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.featured-products .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Badge giảm giá */
+.featured-products .sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff3b30;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Info */
+.featured-products .info {
+    padding: 15px;
+}
+
+.featured-products .info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+/* Chính hãng */
+.featured-products .official {
+    display: inline-block;
+    background: #d0021b;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+/* Rating + Sold */
+.featured-products .rating-sold {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.featured-products .rating-sold .stars {
+    color: #f5a623;
+    font-size: 0.95rem;
+}
+
+.featured-products .rating-sold .sold {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Price */
+.featured-products .price {
+    color: #d0021b;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.featured-products .old-price {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+    margin-left: 6px;
+}
+
+/* Button */
+.featured-products .add-to-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+}
+
+.featured-products .add-to-cart:hover {
+    background: #218838;
+}

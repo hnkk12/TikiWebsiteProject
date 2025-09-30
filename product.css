@@ -1,0 +1,321 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f6f8fa;
+    color: #333;
+}
+
+.header {
+    background: #0ea5a4;
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.header a.logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#product-detail {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-page {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+}
+
+.image-box img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.info-box h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.rating {
+    font-size: 14px;
+    color: #ff9800;
+    margin-bottom: 12px;
+}
+
+.price {
+    font-size: 26px;
+    font-weight: bold;
+    color: #e60023;
+    margin-bottom: 10px;
+}
+
+.price .old {
+    font-size: 16px;
+    color: #777;
+    text-decoration: line-through;
+    margin-left: 8px;
+}
+
+.actions {
+    margin: 20px 0;
+}
+
+.actions button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buy-now {
+    background: #e60023;
+    color: white;
+    border: none;
+}
+
+.add-to-cart {
+    background: white;
+    border: 2px solid #0ea5a4;
+    color: #0ea5a4;
+}
+
+.buy-later {
+    background: #f0f9f9;
+    border: none;
+    color: #0ea5a4;
+}
+
+.features {
+    margin-top: 30px;
+}
+
+.features h3 {
+    margin-bottom: 10px;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features ul li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.features ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #0ea5a4;
+}
+
+.footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+/* Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Box */
+.popup-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-box h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.qty-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.qty-wrapper button {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.qty-input {
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    margin: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Buttons */
+.popup-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.popup-actions button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.popup-actions .confirm {
+    background: #28a745;
+    color: #fff;
+}
+
+.popup-actions .cancel {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* ==== Popup ==== */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 280px;
+    text-align: center;
+}
+
+.qty-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.qty-wrapper button {
+    padding: 8px 12px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.qty-input {
+    width: 50px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.popup-actions button {
+    margin: 5px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.popup-actions .confirm {
+    background: #16a34a;
+    color: #fff;
+}
+
+.popup-actions .cancel {
+    background: #dc2626;
+    color: #fff;
+}
+
+/* ==== THÔNG BÁO THÊM SẢN PHẨM THÀNH CÔNG ==== */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.toast {
+    background: #0ea5a4;
+    color: #fff;
+    padding: 12px 18px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.4s forwards, fadeOut 0.5s 3s forwards;
+}
+
+.toast.success {
+    background: #16a34a;
+}
+
+.toast.error {
+    background: #dc2626;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
