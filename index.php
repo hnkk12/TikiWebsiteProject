@@ -93,8 +93,6 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
             <div class="mySlides fade"><img src="image/b4.png" alt="Banner 4"></div>
             <div class="mySlides fade"><img src="image/b5.png" alt="Banner 5"></div>
             <div class="mySlides fade"><img src="image/b6.png" alt="Banner 6"></div>
-            <div class="mySlides fade"><img src="image/b7.png" alt="Banner 7"></div>
-
             <!-- Nút điều hướng -->
             <a class="prev" onclick="plusSlides(-1)">❮</a>
             <a class="next" onclick="plusSlides(1)">❯</a>
@@ -236,7 +234,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
     </section>
 
     <!-- Chatbot -->
-    <div id="chatbot">
+    <!-- <div id="chatbot">
         <div id="chat-header">Chat với Tibiki <span id="chat-close">✕</span></div>
         <div id="chat-body"></div>
         <div class="chat-footer">
@@ -244,7 +242,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
             <button id="chat-send">Gửi</button>
         </div>
     </div>
-    <button id="chat-toggle">💬</button>
+    <button id="chat-toggle">💬</button> -->
 
     <!-- Thông báo THÊM SP VÀO GIỎ HÀNG -->
     <div id="toast"></div>
@@ -299,5 +297,10 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
         </div>
     </footer>
 
+    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
+    <script>
+        const tudong_chatbox = new TuDongChat('lIKBJuuCEEpDLQsow66EY')
+        tudong_chatbox.initial()
+    </script>
 </body>
 </html>
