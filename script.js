@@ -1,293 +1,184 @@
 // ================== GIỎ HÀNG ==================
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Cập nhật số lượng hiển thị trên icon giỏ
-function updateCartCount()
-{
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCountEl = document.getElementById("cart-count");
+// Render giỏ hàng
+function renderCart() {
+  const cartItemsContainer = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
 
-    if (cartCountEl)
-    {
-        if (count > 0)
-        {
-            cartCountEl.textContent = count;
-            cartCountEl.classList.remove("hidden");
-        } else
-        {
-            cartCountEl.classList.add("hidden");
-        }
-    }
+  if (!cartItemsContainer) return;
+
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <span>${item.name} x ${item.quantity}</span>
+      <span>${(item.price * item.quantity).toLocaleString("vi-VN")}₫</span>
+      <button onclick="removeFromCart(${index})">Xóa</button>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+
+  cartCount.textContent = cart.length;
+  cartTotal.textContent = total.toLocaleString("vi-VN") + "₫";
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ================== THÔNG BÁO THÊM SẢN PHẨM VÀO GIỎ HÀNG ==================
-function showToast(message, type = "success", product = null)
-{
-    const toast = document.getElementById("toast");
-    if (!toast) return;
-
-    let icon = "";
-    let bg = "#333";
-
-    if (type === "success")
-    {
-        icon = '<i class="fa-solid fa-circle-check"></i>';
-        bg = "#4caf50";
-    }
-    if (type === "error")
-    {
-        icon = '<i class="fa-solid fa-circle-xmark"></i>';
-        bg = "#f44336";
-    }
-    if (type === "info")
-    {
-        icon = '<i class="fa-solid fa-circle-info"></i>';
-        bg = "#2196f3";
-    }
-
-    if (product)
-    {
-        toast.innerHTML = `
-            ${icon}
-            <img src="${product.image}" width="40" style="border-radius:6px">
-            <div>
-                <strong>${message}</strong><br>
-                <small>${product.name}</small>
-            </div>
-        `;
-    } else
-    {
-        toast.innerHTML = `${icon} <span>${message}</span>`;
-    }
-
-    toast.style.background = bg;
-
-    toast.className = "show";
-
-    setTimeout(() =>
-    {
-        toast.className = toast.className.replace("show", "");
-    }, 3000);
+// Xóa sản phẩm khỏi giỏ
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+  showToast("Đã xóa sản phẩm!", "info");
 }
 
-// ================== THÊM SẢN PHẨM ==================
-function addToCart(product)
-{
-    let existing = cart.find(item => item.name === product.name);
-    if (existing)
-    {
-        existing.quantity += 1;
-    } else
-    {
-        product.quantity = 1;
-        cart.push(product);
-    }
+// ================== TOAST THÔNG BÁO ==================
+function showToast(message, type = "info") {
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-
-    showToast("Đã thêm vào giỏ hàng!", "success", product);
+  setTimeout(() => toast.remove(), 3000);
 }
 
-// Lắng nghe sự kiện khi bấm nút "Thêm"
-document.querySelectorAll(".add-to-cart").forEach((btn) =>
-{
-    btn.addEventListener("click", (e) =>
-    {
-        let card = e.target.closest(".product-card, .shop-card");
-
-        let product = {
-            name: card.querySelector("h3").innerText,
-            price: card.querySelector(".price").childNodes[0].textContent.trim(),
-            image: card.querySelector("img").src
-        }; addToCart(product);
-    });
-});
-
-// Khi load trang thì cập nhật số lượng luôn
-updateCartCount();
+// ================== THÊM SẢN PHẨM VÀO GIỎ ==================
+function addToCart(name, price) {
+  const item = cart.find((it) => it.name === name);
+  if (item) {
+    item.quantity++;
+  } else {
+    cart.push({ name, price, quantity: 1 });
+  }
+  renderCart();
+  showToast("Đã thêm vào giỏ hàng!", "success");
+}
 
 // ================== SLIDESHOW ==================
-document.addEventListener("DOMContentLoaded", () =>
-{
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) { showSlides(slideIndex += n); }
-    function currentSlide(n) { showSlides(slideIndex = n); }
-
-    function showSlides(n)
-    {
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-
-        if (slides.length === 0) return;
-
-        if (n > slides.length) slideIndex = 1;
-        if (n < 1) slideIndex = slides.length;
-
-        for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
-        for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
-
-        slides[slideIndex - 1].style.display = "block";
-        if (dots[slideIndex - 1]) dots[slideIndex - 1].className += " active";
-    }
-
-    // Expose functions
-    window.plusSlides = plusSlides;
-    window.currentSlide = currentSlide;
-
-    // Auto slide
-    setInterval(() => plusSlides(1), 4000);
-});
+let slideIndex = 0;
+function showSlides() {
+  const slides = document.querySelectorAll(".mySlides");
+  slides.forEach((s) => (s.style.display = "none"));
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+  slides[slideIndex - 1].style.display = "block";
+  setTimeout(showSlides, 3000); // đổi slide mỗi 3s
+}
+document.addEventListener("DOMContentLoaded", showSlides);
 
 // ================== LỌC & TÌM KIẾM ==================
-document.addEventListener("DOMContentLoaded", () =>
-{
-    const checkboxes = document.querySelectorAll(".filter-checkbox");
-    const products = document.querySelectorAll(".shop-card");
-    const searchInput = document.getElementById("searchInput");
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll(".filter-checkbox");
+  const productsEls = document.querySelectorAll(".shop-card");
+  const searchInput = document.getElementById("searchInput");
+  const suggestionsBox = document.getElementById("suggestions");
 
-    function filterProducts()
-    {
-        const checked = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-        const keyword = searchInput?.value.toLowerCase() || "";
+  // Danh sách sản phẩm demo để gợi ý
+  const productNames = [
+    "Nghệ Thuật Tư Duy Phản Biện",
+    "Rèn Luyện Tư Duy Hệ Thống Trong Công Việc",
+    "Vận Mệnh Tiền Kiếp",
+    "Phương Pháp Làm Việc Siêu Hiệu Quả Của Toyota",
+    "LapTop Lenovo V14 IIL-82C400W3VN",
+    "Tai nghe bluetooth nhét tai Neckband",
+    "Nồi cơm điện Locknlock Nemo",
+    "Máy Xay Sinh Tố Lock&Lock",
+    "Sữa Lúa Mạch Nestlé MILO Teen Protein Canxi",
+    "Trà sữa NESTEA trân châu hộp 5 gói",
+    "Kéo Văn Phòng SC-014",
+    "Ống Cắm Bút, Đựng Cọ MakeUp, Văn phòng phẩm Thỏ Mori",
+  ];
 
-        products.forEach(item =>
-        {
-            const category = item.dataset.category;
-            const name = item.querySelector("h3").textContent.toLowerCase();
-            const matchCategory = checked.includes(category);
-            const matchSearch = name.includes(keyword);
+  // Hàm lọc sản phẩm
+  function filterProducts() {
+    const checked = Array.from(checkboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
 
-            item.style.display = (matchCategory && matchSearch) ? "block" : "none";
-        });
+    const keyword = searchInput?.value.toLowerCase() || "";
+
+    productsEls.forEach((item) => {
+      const category = item.dataset.category;
+      const name = item.querySelector("h3").textContent.toLowerCase();
+
+      const matchCategory = checked.length === 0 || checked.includes(category);
+      const matchSearch = name.includes(keyword);
+
+      item.style.display = matchCategory && matchSearch ? "block" : "none";
+    });
+  }
+
+  // Hàm tìm kiếm (chuyển trang)
+  function search() {
+    const keyword = searchInput.value.trim();
+    if (keyword) {
+      window.location.href = `shop.html?search=${encodeURIComponent(keyword)}`;
+    }
+  }
+
+  // Gợi ý khi nhập
+  searchInput?.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    suggestionsBox.innerHTML = "";
+
+    if (!query) {
+      suggestionsBox.style.display = "none";
+      filterProducts();
+      return;
     }
 
-    checkboxes.forEach(cb => cb.addEventListener("change", filterProducts));
-    searchInput?.addEventListener("input", filterProducts);
+    const filtered = productNames.filter((p) =>
+      p.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach((item) => {
+        const div = document.createElement("div");
+        div.textContent = item;
+        div.classList.add("suggestion-item");
+        div.onclick = () => {
+          searchInput.value = item;
+          suggestionsBox.style.display = "none";
+          filterProducts();
+        };
+        suggestionsBox.appendChild(div);
+      });
+      suggestionsBox.style.display = "block";
+    } else {
+      suggestionsBox.style.display = "none";
+    }
+
+    filterProducts(); // lọc trực tiếp khi nhập
+  });
+
+  // Nhấn Enter để tìm kiếm
+  searchInput?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") search();
+  });
+
+  // Checkbox lọc danh mục
+  checkboxes.forEach((cb) => cb.addEventListener("change", filterProducts));
 });
 
-// TÍNH NĂNG THANH TÌM KIẾM
-function search()
-{
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let products = document.querySelectorAll(".product");
+// ================== CHATBOT ==================
+document.addEventListener("DOMContentLoaded", () => {
+  const chatbotBtn = document.getElementById("chatbotBtn");
+  const chatbotBox = document.getElementById("chatbotBox");
+  const chatbotClose = document.getElementById("chatbotClose");
 
-    products.forEach(product =>
-    {
-        let name = product.querySelector(".product-name").textContent.toLowerCase();
+  chatbotBtn?.addEventListener("click", () => {
+    chatbotBox.style.display = "block";
+  });
 
-        if (name.includes(input))
-        {
-            product.style.display = "block"; // Hiện sản phẩm
-        } else
-        {
-            product.style.display = "none"; // Ẩn sản phẩm
-        }
-    });
-}
-
-// CHATBOT
-document.addEventListener("DOMContentLoaded", () =>
-{
-    const chatToggle = document.getElementById("chat-toggle");
-    const chatbot = document.getElementById("chatbot");
-    const chatClose = document.getElementById("chat-close");
-    const chatSend = document.getElementById("chat-send");
-    const chatInput = document.getElementById("chat-input");
-    const chatBox = document.getElementById("chat-body");
-
-    // Câu trả lời mẫu
-    // Câu trả lời mẫu (mở rộng FAQ)
-    const botReplies = [
-        { keywords: ["chào", "hi", "hello", "xin chào"], reply: "Xin chào bạn 👋! Rất vui được hỗ trợ bạn." },
-        { keywords: ["tạm biệt", "bye", "hẹn gặp lại"], reply: "Hẹn gặp lại bạn 👋. Chúc bạn một ngày tốt lành!" },
-        { keywords: ["giá", "bao nhiêu", "cost", "price"], reply: "Bạn vui lòng cho mình biết tên sản phẩm để mình báo giá nhé 💰." },
-        { keywords: ["mua", "đặt hàng", "order"], reply: "Bạn có thể bấm nút 'Thêm vào giỏ' hoặc 'Mua ngay' để đặt hàng 🛒." },
-        { keywords: ["ship", "giao hàng", "vận chuyển"], reply: "Bên mình hỗ trợ giao hàng toàn quốc 🚚. Thời gian từ 2-5 ngày tuỳ khu vực." },
-        { keywords: ["liên hệ", "contact", "hỗ trợ"], reply: "Bạn có thể liên hệ qua email support@tibiki.vn hoặc hotline 0123-456-789 ☎️." },
-        { keywords: ["khuyến mãi", "sale", "giảm giá"], reply: "Hiện tại shop có nhiều chương trình khuyến mãi hấp dẫn 🎉. Bạn vào mục *Khuyến mãi* để xem chi tiết nhé." },
-        { keywords: ["thanh toán", "payment", "trả tiền"], reply: "Shop hỗ trợ thanh toán qua COD (nhận hàng trả tiền) 💵 và chuyển khoản ngân hàng 💳." },
-        { keywords: ["địa chỉ", "ở đâu", "shop ở đâu"], reply: "Địa chỉ shop: 123 Nguyễn Huệ, Quận 1, TP.HCM 🏬." },
-        { keywords: ["giờ mở cửa", "giờ làm việc", "opening hours"], reply: "Shop mở cửa từ 8:00 – 21:00 (T2 – CN) ⏰." },
-        { keywords: ["bảo hành", "warranty"], reply: "Các sản phẩm điện tử được bảo hành chính hãng từ 6 đến 24 tháng 🔧." },
-        { keywords: ["đổi trả", "return", "refund"], reply: "Bạn được đổi trả trong vòng 7 ngày nếu sản phẩm lỗi do nhà sản xuất 📦." },
-        { keywords: ["ưu đãi", "voucher", "coupon"], reply: "Bạn có thể nhập mã 'TIBIKI10' để được giảm 10% cho đơn hàng đầu tiên 🎟️." },
-        { keywords: ["thời gian giao", "bao lâu", "ship mấy ngày"], reply: "Nội thành TP.HCM: 1-2 ngày 🚴. Ngoại tỉnh: 3-5 ngày 🚚." },
-        { keywords: ["free ship", "miễn phí vận chuyển"], reply: "Đơn hàng trên 500k sẽ được miễn phí vận chuyển 🆓." },
-        { keywords: ["sản phẩm mới", "hàng mới"], reply: "Bạn có thể xem danh mục *Sản phẩm mới* để cập nhật mẫu hot nhất 🔥." },
-        { keywords: ["hết hàng", "còn hàng không"], reply: "Bạn vui lòng cho mình tên sản phẩm để kiểm tra tình trạng còn hàng 🛒." },
-        { keywords: ["cách mua", "hướng dẫn mua"], reply: "Bạn chọn sản phẩm ➝ bấm 'Thêm vào giỏ' ➝ vào giỏ hàng ➝ 'Thanh toán' 📝." },
-        { keywords: ["feedback", "đánh giá", "review"], reply: "Bạn có thể xem đánh giá sản phẩm ở cuối trang chi tiết sản phẩm ⭐." },
-        { keywords: ["hỗ trợ kỹ thuật", "kỹ thuật"], reply: "Đội ngũ kỹ thuật sẽ hỗ trợ bạn từ 8h-21h mỗi ngày 🛠️." }
-    ];
-
-
-    // Hàm tìm câu trả lời
-    function getBotReply(msg)
-    {
-        msg = msg.toLowerCase();
-        for (let item of botReplies)
-        {
-            if (item.keywords.some(k => msg.includes(k)))
-            {
-                return "Bot: " + item.reply;
-            }
-        }
-        return "Bot: Xin lỗi, mình chưa hiểu ý bạn 😅. Bạn có thể hỏi về: chào, giá, mua, ship, liên hệ.";
-    }
-
-    // Thêm tin nhắn vào khung chat
-    function addMessage(sender, text)
-    {
-        const msg = document.createElement("div");
-        msg.className = sender === "bot" ? "bot-msg" : "user-msg";
-        msg.textContent = text;
-        chatBox.appendChild(msg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    // Khi mở chatbot ==> chào
-    chatToggle.addEventListener("click", () =>
-    {
-        chatbot.style.display = "flex";
-        chatBox.innerHTML = "";
-        addMessage("bot", "Xin chào! Mình là Tibiki. Bạn cần hỗ trợ gì?");
-    });
-
-    if (chatClose)
-    {
-        chatClose.addEventListener("click", () =>
-        {
-            chatbot.style.display = "none";
-        });
-    }
-
-    // Gửi tin nhắn
-    function sendChat()
-    {
-        const msg = chatInput.value.trim();
-        if (!msg) return;
-
-        addMessage("user", "Bạn: " + msg);
-        chatInput.value = "";
-
-        setTimeout(() =>
-        {
-            let reply = getBotReply(msg);
-            addMessage("bot", reply);
-        }, 500);
-    }
-
-    if (chatSend) chatSend.addEventListener("click", sendChat);
-    if (chatInput) chatInput.addEventListener("keypress", e =>
-    {
-        if (e.key === "Enter") sendChat();
-    });
+  chatbotClose?.addEventListener("click", () => {
+    chatbotBox.style.display = "none";
+  });
 });
 
-
-
-
-
+// ================== CHẠY BAN ĐẦU ==================
+renderCart();

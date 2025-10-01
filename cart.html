@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Giỏ hàng</title>
     <link rel="stylesheet" href="stylecart.css" />
+    <link rel="icon" type="image/jpg" href="image/logo.png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -145,7 +146,7 @@
   <body>
     <h2>Giỏ hàng của bạn</h2>
 
-    <a href="index.php" class="home-btn">🏠 Trang chủ</a>
+    <a href="index.php" class="home-btn"> Trang chủ</a>
 
     <div
       style="
@@ -157,25 +158,34 @@
         align-items: center;
       "
     >
-      <input
-        type="text"
-        id="trackCode"
-        placeholder="Nhập mã đơn hàng..."
-        style="padding: 6px; border-radius: 6px; border: 1px solid #ccc"
+      <img
+        src="https://cdn-icons-png.flaticon.com/128/7368/7368459.png"
+        alt="Tra cứu"
+        id="toggleSearch"
+        style="width: 32px; height: 32px; cursor: pointer"
       />
-      <button
-        id="trackBtn"
-        style="
-          padding: 6px 10px;
-          border-radius: 6px;
-          border: none;
-          background: #4e54c8;
-          color: #fff;
-          cursor: pointer;
-        "
-      >
-        Tra cứu
-      </button>
+
+      <div id="searchBox" style="display: none; gap: 10px; align-items: center">
+        <input
+          type="text"
+          id="trackCode"
+          placeholder="Nhập mã đơn hàng..."
+          style="padding: 6px; border-radius: 6px; border: 1px solid #ccc"
+        />
+        <button
+          id="trackBtn"
+          style="
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: none;
+            background: #4e54c8;
+            color: #fff;
+            cursor: pointer;
+          "
+        >
+          Tra cứu
+        </button>
+      </div>
     </div>
 
     <div class="cart-header">
@@ -283,7 +293,24 @@
           container.innerHTML = "<p>Giỏ hàng trống.</p>";
           totalEl.innerText = "";
           qrAmount.innerText = "0";
+
+          // Ẩn "chọn tất cả" khi không có sản phẩm
+          document.querySelector(".cart-header").style.display = "none";
           return;
+        }
+        //đóng mở tìm kiếm
+        document
+          .getElementById("toggleSearch")
+          .addEventListener("click", () => {
+            const box = document.getElementById("searchBox");
+            box.style.display = box.style.display === "none" ? "flex" : "none";
+          });
+
+        // Hiện "chọn tất cả" nếu có từ 2 sản phẩm
+        if (cart.length >= 2) {
+          document.querySelector(".cart-header").style.display = "flex";
+        } else {
+          document.querySelector(".cart-header").style.display = "none";
         }
 
         cart.forEach((item, i) => {
@@ -294,18 +321,17 @@
           let div = document.createElement("div");
           div.classList.add("cart-item");
           div.innerHTML = `
-      <input type="checkbox" ${
-        item.selected ? "checked" : ""
-      } onchange="toggleSelect(${i},this.checked)" />
-      <img src="${item.image}" alt="${item.name}" width="60">
-      <div class="cart-details"><b>${item.name}</b><br>${item.price}</div>
-      <div class="cart-actions">
-        <button onclick="changeQuantity(${i},-1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity(${i},1)">+</button>
-        <button onclick="removeItem(${i})">Xóa</button>
-      </div>
-    `;
+          <input type="checkbox" ${item.selected ? "checked" : ""}
+            onchange="toggleSelect(${i},this.checked)" />
+          <img src="${item.image}" alt="${item.name}" width="60">
+          <div class="cart-details"><b>${item.name}</b><br>${item.price}</div>
+          <div class="cart-actions">
+            <button onclick="changeQuantity(${i},-1)">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${i},1)">+</button>
+            <button onclick="removeItem(${i})">Xóa</button>
+          </div>
+        `;
           container.appendChild(div);
         });
 
@@ -320,10 +346,10 @@
           if (totalToPay < 0) totalToPay = 0;
 
           totalEl.innerHTML = `
-    Giá gốc: ${total.toLocaleString("vi-VN")}₫<br>
-    Giảm: ${discountAmount.toLocaleString("vi-VN")}₫<br>
-    Tổng: ${totalToPay.toLocaleString("vi-VN")}₫
-  `;
+        Giá gốc: ${total.toLocaleString("vi-VN")}₫<br>
+        Giảm: ${discountAmount.toLocaleString("vi-VN")}₫<br>
+        Tổng: ${totalToPay.toLocaleString("vi-VN")}₫
+      `;
         } else {
           totalEl.innerText =
             "Tổng: " + totalToPay.toLocaleString("vi-VN") + "₫";
@@ -448,20 +474,30 @@
           .then((res) => res.json())
           .then((data) => {
             if (data.status === "success") {
-              let info = `Mã đơn: ${data.order.order_code}\nTrạng thái: ${
-                data.order.status
-              }\nTổng: ${parseInt(data.order.total_price).toLocaleString(
-                "vi-VN"
-              )}₫`;
-              let products = "";
+              const status = data.order.status || "Đang xử lý";
+
+              // Danh sách sản phẩm trước
+              let products = "Sản phẩm:\n";
               data.items.forEach((it) => {
-                products += `${it.product_name} x ${it.quantity} - ${parseInt(
+                products += `- ${it.product_name} x ${it.quantity} - ${parseInt(
                   it.price
                 ).toLocaleString("vi-VN")}₫\n`;
               });
-              showToast(info + "\n" + products, "success");
-            } else showToast("Không tìm thấy đơn hàng!", "error");
+
+              // Sau đó trạng thái + tổng
+              const info = `${products}
+Trạng thái: ${status}
+Tổng: ${parseInt(data.order.total_price).toLocaleString("vi-VN")}₫
+`;
+
+              showToast(info, "success");
+            } else {
+              // Nếu không có đơn hàng
+              const info = `Bạn chưa có đơn hàng nào trong hệ thống.`;
+              showToast(info, "info");
+            }
           })
+
           .catch((err) => {
             console.error(err);
             showToast("Lỗi kết nối server!", "error");
