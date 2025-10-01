@@ -83,8 +83,8 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
         </nav>
     </header>
 
-    <!-- BANNER -->
-    <section class="banner-row">
+      <!-- BANNER -->
+      <section class="banner-row">
         <!-- Cột trái: Slideshow -->
         <div class="slideshow-container">
             <div class="mySlides fade"><img src="image/b1.png" alt="Banner 1"></div>
@@ -104,6 +104,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <span class="dot" onclick="currentSlide(3)"></span>
                 <span class="dot" onclick="currentSlide(4)"></span>
                 <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
             </div>
         </div>
 
@@ -302,5 +303,54 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
         const tudong_chatbox = new TuDongChat('lIKBJuuCEEpDLQsow66EY')
         tudong_chatbox.initial()
     </script>
+    <!-- Thêm JS trực tiếp -->
+    <script>
+  let slideIndex = 1;
+  let slideTimer;
+
+  function showSlides(n) {
+  const slides = document.querySelectorAll(".mySlides");
+  const dots = document.querySelectorAll(".dot");
+
+  if (slides.length === 0) return;
+
+  if (n > slides.length) slideIndex = 1;
+  if (n < 1) slideIndex = slides.length;
+
+  slides.forEach(s => s.style.display = "none");
+  dots.forEach(d => d.classList.remove("active"));
+
+  slides[slideIndex - 1].style.display = "block";
+  if(dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active");
+}
+
+  function plusSlides(n) {
+  clearTimeout(slideTimer);
+  slideIndex += n;
+  showSlides(slideIndex);
+  startSlideAuto();
+}
+
+function currentSlide(n) {
+  clearTimeout(slideTimer);
+  slideIndex = n;
+  showSlides(slideIndex);
+  startSlideAuto();
+}
+
+  function startSlideAuto() {
+    slideTimer = setTimeout(() => {
+      slideIndex++;
+      showSlides(slideIndex);
+      startSlideAuto();
+    }, 4000);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    showSlides(slideIndex);
+    startSlideAuto();
+  });
+</script>
+
 </body>
 </html>

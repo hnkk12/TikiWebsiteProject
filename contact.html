@@ -53,27 +53,6 @@
     <div id="auth-modal" class="modal hidden">
         <div class="modal-content">
             <span class="close-btn" id="close-auth">&times;</span>
-
-            <!-- Form Đăng nhập -->
-            <div id="login-form">
-                <h2>Đăng nhập</h2>
-                <div id="login-message" class="message"></div>
-                <input type="text" id="login-username" placeholder="Tên đăng nhập" required>
-                <input type="password" id="login-password" placeholder="Mật khẩu" required>
-                <button onclick="handleLogin()">Đăng nhập</button>
-                <p>Chưa có tài khoản? <a href="#" id="show-register">Đăng ký</a></p>
-            </div>
-
-            <!-- Form Đăng ký -->
-            <div id="register-form" class="hidden">
-                <h2>Đăng ký</h2>
-                <div id="register-message" class="message"></div>
-                <input type="text" id="register-username" placeholder="Tên đăng nhập" required>
-                <input type="email" id="register-email" placeholder="Email" required>
-                <input type="password" id="register-password" placeholder="Mật khẩu" required>
-                <button onclick="handleRegister()">Đăng ký</button>
-                <p>Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a></p>
-            </div>
         </div>
     </div>
 
@@ -91,19 +70,23 @@
                         <p><strong>Giờ làm việc:</strong> 8:00 – 21:00 (T2–CN)</p>
                     </div>
 
-                    <form class="contact-form">
+                    <form class="contact-form" id="contactForm">
                         <h2>Gửi tin nhắn</h2>
+                    
                         <label>Họ và tên</label>
-                        <input type="text" placeholder="Nhập họ tên" required>
-
+                        <input type="text" id="contact-name" name="name" placeholder="Nhập họ tên" required>
+                    
                         <label>Email</label>
-                        <input type="email" placeholder="Nhập email" required>
-
+                        <input type="email" id="contact-email" name="email" placeholder="Nhập email" required>
+                    
                         <label>Nội dung</label>
-                        <textarea rows="5" placeholder="Viết tin nhắn của bạn..." required></textarea>
-
+                        <textarea rows="5" id="contact-message" name="message" placeholder="Viết tin nhắn của bạn..." required></textarea>
+                    
                         <button type="submit" class="btn-basic">Gửi ngay</button>
+                        <div id="contact-message-box" style="margin-top: 10px; font-weight: bold;"></div>
+
                     </form>
+                    
                 </div>
         </section>
     </main>
@@ -169,7 +152,30 @@
             <p>© 2025 Tiki Store</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    const formData = new FormData(this);
+    const messageBox = document.getElementById('contact-message-box');
+
+    fetch('send_contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        messageBox.textContent = data.message;  // Hiển thị message trực tiếp
+        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+        if(data.status === 'success') this.reset();
+    })
+    .catch(err => {
+        messageBox.textContent = 'Có lỗi xảy ra, vui lòng thử lại';
+        messageBox.style.color = 'red';
+    });
+});
+        </script>
+        
 </body>
 
 </html>
