@@ -39,8 +39,9 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: "Montserrat", sans-serif;
-            margin-left: 10px;
+            margin-left: 8px;
         }
+
         .welcome {
             font-weight: 600;
             margin-right: 5px;
@@ -51,13 +52,17 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
 <body>
     <!-- HEADER -->
     <header>
-        <a href="index.php"><img src="image/logo.png" alt="Tibiki" height="65" width="150"></a>
-        <div class="search-box">
-            <a href="">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
-            <button onclick="search()">Tìm kiếm</button>
+        <a href="index.php">
+            <img src="image/logo.png" alt="Tiki" height="65" width="150">
+        </a>
+        <div class="search-wrapper">
+            <div class="search-box">
+                <a href="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
+                <div id="suggestions" class="suggestions"></div>
+            </div>
         </div>
         <nav class="navbar">
             <ul>
@@ -83,8 +88,8 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
         </nav>
     </header>
 
-      <!-- BANNER -->
-      <section class="banner-row">
+    <!-- BANNER -->
+    <section class="banner-row">
         <!-- Cột trái: Slideshow -->
         <div class="slideshow-container">
             <div class="mySlides fade"><img src="image/b1.png" alt="Banner 1"></div>
@@ -112,10 +117,18 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
         <aside class="book-column">
             <h3>Sách bán chạy</h3>
             <ul>
-                <a href="product.html?id=5"><li><img src="image/sach1.png" alt=""> Nghệ Thuật Tư Duy Phản Biện </li></a>
-                <a href="product.html?id=6"><li><img src="image/sach2.png" alt=""> Rèn Luyện Tư Duy Hệ Thống Trong Công Việc</li></a>
-                <a href="product.html?id=7"><li><img src="image/sach3.png" alt=""> Vận Mệnh Tiền Kiếp </li></a>
-                <a href="product.html?id=8"><li><img src="image/sach4.png" alt=""> Phương Pháp Làm Việc Siêu Hiệu Quả Của Toyota</li></a>
+                <a href="product.html?id=5">
+                    <li><img src="image/sach1.png" alt=""> Nghệ Thuật Tư Duy Phản Biện </li>
+                </a>
+                <a href="product.html?id=6">
+                    <li><img src="image/sach2.png" alt=""> Rèn Luyện Tư Duy Hệ Thống Trong Công Việc</li>
+                </a>
+                <a href="product.html?id=7">
+                    <li><img src="image/sach3.png" alt=""> Vận Mệnh Tiền Kiếp </li>
+                </a>
+                <a href="product.html?id=8">
+                    <li><img src="image/sach4.png" alt=""> Phương Pháp Làm Việc Siêu Hiệu Quả Của Toyota</li>
+                </a>
             </ul>
         </aside>
     </section>
@@ -164,7 +177,9 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <div class="sale-badge">-14%</div>
                 <a href="product.html?id=1"><img src="image/sp1.png" alt="Sữa"></a>
                 <div class="info">
-                    <a href="product.html?id=1"><h3>Sữa Lúa Mạch Nestlé MILO Teen Protein Canxi (24 x 210ml)</h3></a>
+                    <a href="product.html?id=1">
+                        <h3>Sữa Lúa Mạch Nestlé MILO Teen Protein Canxi (24 x 210ml)</h3>
+                    </a>
                     <br>
                     <span class="official">Chính hãng</span>
                     <div class="rating-sold">
@@ -180,7 +195,9 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <div class="sale-badge">-2%</div>
                 <a href="product.html?id=2"><img src="image/sp2.png" alt="Harry Potter"></a>
                 <div class="info">
-                    <a href="product.html?id=2"><h3>Combo Harry Potter (Trọn Bộ 7 Cuốn) + Tặng Bản Đồ Phép Thuật</h3></a>
+                    <a href="product.html?id=2">
+                        <h3>Combo Harry Potter (Trọn Bộ 7 Cuốn) + Tặng Bản Đồ Phép Thuật</h3>
+                    </a>
                     <span class="official">Chính hãng</span>
                     <div class="rating-sold">
                         <div class="stars">★★★★★</div>
@@ -195,7 +212,9 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <div class="sale-badge">-45%</div>
                 <a href="product.html?id=3"><img src="image/sp3.png" alt="Bút bi"></a>
                 <div class="info">
-                    <a href="product.html?id=3"><h3>Combo Bút Bi Thiên Long PRO 027 (0.5mm) – TL-105</h3></a>
+                    <a href="product.html?id=3">
+                        <h3>Combo Bút Bi Thiên Long PRO 027 (0.5mm) – TL-105</h3>
+                    </a>
                     <br>
                     <span class="official">Chính hãng</span>
                     <div class="rating-sold">
@@ -211,7 +230,9 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <div class="sale-badge">-39%</div>
                 <a href="product.html?id=4"><img src="image/sp4.png" alt="Samsung Galaxy S24 FE"></a>
                 <div class="info">
-                    <a href="product.html?id=4"><h3>Điện Thoại Samsung Galaxy S24 FE (8GB/128GB) - Hàng Chính Hãng</h3></a>
+                    <a href="product.html?id=4">
+                        <h3>Điện Thoại Samsung Galaxy S24 FE (8GB/128GB) - Hàng Chính Hãng</h3>
+                    </a>
                     <span class="official">Chính hãng</span>
                     <div class="rating-sold">
                         <div class="stars">★★★★★</div>
@@ -278,7 +299,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
             <div class="footer-column">
                 <h3>Kết nối</h3>
                 <div class="social-icons">
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3128/3128304.png" alt="Facebook"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3128/3128304.png" alt="Facebook"></a>
                     <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
                     <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" alt="Twitter"></a>
                     <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/174/174883.png" alt="YouTube"></a>
@@ -305,52 +326,53 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
     </script>
     <!-- Thêm JS trực tiếp -->
     <script>
-  let slideIndex = 1;
-  let slideTimer;
+        let slideIndex = 1;
+        let slideTimer;
 
-  function showSlides(n) {
-  const slides = document.querySelectorAll(".mySlides");
-  const dots = document.querySelectorAll(".dot");
+        function showSlides(n) {
+            const slides = document.querySelectorAll(".mySlides");
+            const dots = document.querySelectorAll(".dot");
 
-  if (slides.length === 0) return;
+            if (slides.length === 0) return;
 
-  if (n > slides.length) slideIndex = 1;
-  if (n < 1) slideIndex = slides.length;
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
 
-  slides.forEach(s => s.style.display = "none");
-  dots.forEach(d => d.classList.remove("active"));
+            slides.forEach(s => s.style.display = "none");
+            dots.forEach(d => d.classList.remove("active"));
 
-  slides[slideIndex - 1].style.display = "block";
-  if(dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active");
-}
+            slides[slideIndex - 1].style.display = "block";
+            if (dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active");
+        }
 
-  function plusSlides(n) {
-  clearTimeout(slideTimer);
-  slideIndex += n;
-  showSlides(slideIndex);
-  startSlideAuto();
-}
+        function plusSlides(n) {
+            clearTimeout(slideTimer);
+            slideIndex += n;
+            showSlides(slideIndex);
+            startSlideAuto();
+        }
 
-function currentSlide(n) {
-  clearTimeout(slideTimer);
-  slideIndex = n;
-  showSlides(slideIndex);
-  startSlideAuto();
-}
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlides(slideIndex);
+            startSlideAuto();
+        }
 
-  function startSlideAuto() {
-    slideTimer = setTimeout(() => {
-      slideIndex++;
-      showSlides(slideIndex);
-      startSlideAuto();
-    }, 4000);
-  }
+        function startSlideAuto() {
+            slideTimer = setTimeout(() => {
+                slideIndex++;
+                showSlides(slideIndex);
+                startSlideAuto();
+            }, 4000);
+        }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    showSlides(slideIndex);
-    startSlideAuto();
-  });
-</script>
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlides(slideIndex);
+            startSlideAuto();
+        });
+    </script>
 
 </body>
+
 </html>

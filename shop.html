@@ -24,13 +24,17 @@
 <body>
     <!-- HEADER -->
     <header>
-        <a href="index.php"><img src="image/logo.png" alt="Tibiki" height="65" width="150"></a>
-        <div class="search-box">
-            <a href="">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
-            <button onclick="search()">Tìm kiếm</button>
+        <a href="index.php">
+            <img src="image/logo.png" alt="Tiki" height="65" width="150">
+        </a>
+        <div class="search-wrapper">
+            <div class="search-box">
+                <a href="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
+                <div id="suggestions" class="suggestions"></div>
+            </div>
         </div>
         <nav class="navbar">
             <ul>

@@ -24,42 +24,43 @@ header {
   font-weight: bold;
 }
 
-.search-box {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 8px 12px;
-  border-radius: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 310px;
-}
 .btn-login {
-  background: linear-gradient(135deg, #4facfe, #00f2fe); /* màu nền đẹp */
-  color: white; /* chữ trắng */
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  /* màu nền đẹp */
+  color: white;
+  /* chữ trắng */
   font-size: 15px;
   font-weight: 600;
   padding: 8px 18px;
   border: none;
-  border-radius: 25px; /* bo tròn */
+  border-radius: 25px;
+  /* bo tròn */
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: "Montserrat", sans-serif;
 }
+
 .btn-logout {
-  background: linear-gradient(135deg, #4facfe, #00f2fe); /* màu nền đẹp */
-  color: white; /* chữ trắng */
-  font-size: 15px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  /* màu nền đẹp */
+  color: white;
+  /* chữ trắng */
+  font-size: 18px;
   font-weight: 600;
-  padding: 8px 18px;
+  padding: 8px 15px;
   border: none;
-  border-radius: 25px; /* bo tròn */
+  border-radius: 25px;
+  /* bo tròn */
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: "Montserrat", sans-serif;
 }
+
 .btn-login:hover {
-  background: linear-gradient(135deg, #43e97b, #38f9d7); /* đổi màu khi hover */
-  transform: scale(1.05); /* phóng to nhẹ */
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  /* đổi màu khi hover */
+  transform: scale(1.05);
+  /* phóng to nhẹ */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -72,9 +73,9 @@ header {
   display: flex;
   align-items: center;
   background: #fff;
-  padding: 8px 12px;
+  padding: 8px 10px;
   border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: none /*0 4px 10px rgba(0, 0, 0, 0.15)*/;
   position: relative;
   z-index: 1001;
   transition: border-radius 0.2s ease;
@@ -90,7 +91,8 @@ header {
   flex: 1;
   padding: 8px;
   font-size: 14px;
-  background: transparent;
+  background: transparent; /* hoặc background: #fff nếu muốn trắng */
+  color: #000; /* màu chữ */
 }
 
 .search-box button {
